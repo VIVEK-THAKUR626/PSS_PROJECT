@@ -1,10 +1,18 @@
 class marks:
-    def __init__(self,subject,score = 0):
+    def __init__(self,subject):
         self.subject = subject
-        self.score = score
+        self.score = 0
+        self.no_subjects = 0
     def input_marks_subject(self):
-        self.subject = input("Enter the subject :")
-        self.score = int(input("Enter the marks :"))
+        self.no_subjects = int(input("Enter no. of subjects :"))
+        self.subject_dict = dict()
+        for i in range(0,self.no_subjects):
+            self.subject = input("Enter the subject :")
+            self.score = int(input("Enter the marks :"))
+            self.subject_dict[self.subject] = self.score
+    def total_average(self):
+        self.total = sum(self.subject_dict.values())
+        self.average = self.total/self.no_subjects
     
 class student(marks):
     def __init__(self,id,subject="",name = ""):
@@ -17,10 +25,12 @@ class student(marks):
         print()
         print(f"Student name : {self.name}")
         print(f"Student ID : {self.id}")
-        print(f"Subject : {self.subject}")
-        print(f"Marks : {self.score}")
+        print(f"Marks : {self.subject_dict}")
+        print(f"Total marks : {self.total}")
+        print(f"Average : {self.average}")
     
 student1 = student(2411981626)
 student1.input_name()
 student1.input_marks_subject()
+student1.total_average()
 student1.display()
