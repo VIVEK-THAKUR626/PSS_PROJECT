@@ -36,6 +36,17 @@ class Student(marks):
         print(f"Average : {self.average}")
         print(f"Status : {self.performance}")
         print("--------------------------")
+    def grade_card(self):
+        filename = f"GradeCard_{self.id}.txt"
+        with open(filename,"w") as file:
+            file.write("-----STUDENT'S REPORT-----\n")
+            file.write(f"Name : {self.name}\n")
+            file.write(f"ID : {self.id}\n")
+            file.write(f"Score : {self.subject_dict}\n")
+            file.write(f"Total Score : {self.total}\n")
+            file.write(f"Average : {self.average}\n")
+            file.write(f"Status : {self.performance}\n")
+            file.write("--------------------------\n")
 
 class_marks = []
 student_list = []  
@@ -54,6 +65,8 @@ def create_student(no_of_students):
         class_marks.append(student.total)
     for student in student_list:
         student.display()
+    for student in student_list:
+        student.grade_card()
     print(f"\nHighest marks in the class : {max(class_marks)}")
     print(f"Lowest marks in the class : {min(class_marks)}")
 
