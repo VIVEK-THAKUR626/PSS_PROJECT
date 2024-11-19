@@ -1,9 +1,10 @@
 class marks:
-    def __init__(self,subject):
+    def __init__(self,subject,total):
         self.subject = subject
         self.score = 0
         self.no_subjects = 0
         self.fail = False
+        self.total = total
     def input_marks_subject(self):
         self.no_subjects = int(input("Enter no. of subjects :"))
         self.subject_dict = dict()
@@ -20,8 +21,8 @@ class marks:
         self.performance = "FAIL" if self.fail else "PASS"
 
 class Student(marks):
-    def __init__(self,id,subject="",name = ""):
-        super().__init__(subject)
+    def __init__(self,id,subject="",name = "",total = 0):
+        super().__init__(subject,total)
         self.name = name
         self.id = id
     def input_name(self):
@@ -30,12 +31,13 @@ class Student(marks):
         print("\n-----STUDENT'S REPORT-----")
         print(f"Name : {self.name}")
         print(f"ID : {self.id}")
-        print(f"Marks : {self.subject_dict}")
-        print(f"Total marks : {self.total}")
+        print(f"Score : {self.subject_dict}")
+        print(f"Total Score : {self.total}")
         print(f"Average : {self.average}")
         print(f"Status : {self.performance}")
         print("--------------------------")
 
+class_marks = []
 student_list = []  
 
 def create_student(no_of_students):
@@ -48,8 +50,12 @@ def create_student(no_of_students):
         student.input_marks_subject()
         student.total_average()
         student.status()
-    for objects in student_list:
-        objects.display()
+    for student in student_list:
+        class_marks.append(student.total)
+    for student in student_list:
+        student.display()
+    print(f"\nHighest marks in the class : {max(class_marks)}")
+    print(f"Lowest marks in the class : {min(class_marks)}")
 
 no_of_students = int(input("Enter the number of students : "))
 create_student(no_of_students)
