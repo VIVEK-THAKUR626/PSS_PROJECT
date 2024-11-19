@@ -19,7 +19,7 @@ class marks:
             self.fail = True
         self.performance = "FAIL" if self.fail else "PASS"
 
-class student(marks):
+class Student(marks):
     def __init__(self,id,subject="",name = ""):
         super().__init__(subject)
         self.name = name
@@ -27,17 +27,30 @@ class student(marks):
     def input_name(self):
         self.name = input("Enter the name :")
     def display(self):
-        print()
-        print(f"Student name : {self.name}")
-        print(f"Student ID : {self.id}")
+        print("\n-----STUDENT'S REPORT-----")
+        print(f"Name : {self.name}")
+        print(f"ID : {self.id}")
         print(f"Marks : {self.subject_dict}")
         print(f"Total marks : {self.total}")
         print(f"Average : {self.average}")
         print(f"Status : {self.performance}")
-    
-student1 = student(2411981626)
-student1.input_name()
-student1.input_marks_subject()
-student1.total_average()
-student1.status()
-student1.display()
+        print("--------------------------")
+
+student_list = []  
+
+def create_student(no_of_students):
+    for j in range(0,no_of_students):
+        roll_no = int(input("Enter the student id : "))
+        obj_name = Student(roll_no)
+        student_list.append(obj_name)
+    for student in student_list:
+        student.input_name()
+        student.input_marks_subject()
+        student.total_average()
+        student.status()
+    for objects in student_list:
+        objects.display()
+
+no_of_students = int(input("Enter the number of students : "))
+create_student(no_of_students)
+
