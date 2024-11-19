@@ -56,19 +56,32 @@ def create_student(no_of_students):
         roll_no = int(input("Enter the student id : "))
         obj_name = Student(roll_no)
         student_list.append(obj_name)
+
     for student in student_list:
         student.input_name()
         student.input_marks_subject()
         student.total_average()
         student.status()
+
     for student in student_list:
         class_marks.append(student.total)
+
     for student in student_list:
         student.display()
-    for student in student_list:
         student.grade_card()
-    print(f"\nHighest marks in the class : {max(class_marks)}")
-    print(f"Lowest marks in the class : {min(class_marks)}")
+
+    print(f"\nHighest score in the class : {max(class_marks)}")
+    print(f"Lowest score in the class : {min(class_marks)}\n")
+    
+    class_marks.sort(reverse=True)
+    rank = 1
+    print(f"--------RANKINGS--------")
+    for i in range(len(class_marks)):
+        for student in student_list:
+            if class_marks[i] == student.total:
+                print(f"{rank}.{student.name} | Total score: {student.total}")
+        rank += 1
+    print(f"------------------------")
 
 no_of_students = int(input("Enter the number of students : "))
 create_student(no_of_students)
